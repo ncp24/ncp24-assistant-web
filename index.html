@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>NCP24 Assistant (Dev)</title>
+<link rel="preconnect" href="https://assistant-dev.ncp24.com">
+<style>
+:root{--ncp:#e10600;--bg:#fff;--text:#222;--muted:#777;--shadow:0 10px 30px rgba(0,0,0,.12)}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;color:var(--text);background:#fafafa}
+main{max-width:900px;margin:40px auto;padding:0 16px}
+.ncp-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:var(--ncp);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow);z-index:999999}
+.ncp-panel{position:fixed;right:18px;bottom:84px;width:360px;max-width:92vw;height:560px;max-height:78vh;background:var(--bg);border-radius:16px;box-shadow:var(--shadow);display:none;flex-direction:column;overflow:hidden;z-index:999998}
+.ncp-panel.open{display:flex}
+.ncp-head{background:var(--ncp);color:#fff;padding:12px 14px;display:flex;align-items:center;justify-content:space-between}
+.ncp-head h3{margin:0;font-size:16px}
+.ncp-body{padding:12px;gap:10px;display:flex;flex-direction:column;overflow:auto;flex:1;background:#f7f7f8}
+.msg{max-width:80%;padding:10px 12px;border-radius:14px;font-size:14px;line-height:1.35;box-shadow:0 1px 2px rgba(0,0,0,.05);white-space:pre-wrap}
+.me{align-self:flex-end;background:#e7f0ff}
+.bot{align-self:flex-start;background:#fff}
+.muted{color:var(--muted);font-size:12px}
+.ncp-input{display:flex;gap:8px;padding:10px;background:#fff;border-top:1px solid #eee}
+.ncp-input input{flex:1;border:1px solid #ddd;border-radius:12px;padding:10px 12px;font-size:14px}
+.ncp-input button{background:var(--ncp);color:#fff;border:0;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer}
+.spinner{width:18px;height:18px;border:2px solid #ddd;border-top-color:#fff;border-left-color:#fff;border-radius:50%;animation:spin .8s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+  <main>
+    <h1>NCP24 Assistant (Dev)</h1>
+    <p>Unten rechts ist der Chat-Button. Klick & los!</p>
+  </main>
+
+  <div class="ncp-fab" id="ncpFab" title="Chat öffnen" aria-label="Open chat">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M21 12c0 4.4-4 8-9 8-1.13 0-2.21-.18-3.21-.5L3 21l1.64-3.28C4.23 16.5 4 14.79 4 13c0-4.4 4.03-8 9-8s8 3.6 8 7z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+
+  <section class="ncp-panel" id="ncpPanel" aria-live="polite">
+    <div class="ncp-head">
+      <h3>NCP24 Assistant</h3>
+      <button id="ncpClose" style="all:unset;cursor:pointer" aria-label="Close">✕</button>
+    </div>
+    <div class="ncp-body" id="ncpBody"></div>
+    <form class="ncp-input" id="ncpForm">
+      <input id="ncpInput" placeholder="Frag mich auf DE/EN/TR/RU…" autocomplete="off" />
+      <button id="ncpSend" type="submit">Send</button>
+    </form>
+  </section>
+
+  <script src="./widget.js"></script>
+</body>
+</html>
